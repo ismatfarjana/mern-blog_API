@@ -23,6 +23,12 @@ mongoose
     console.error("Error connecting to mongoDB", err);
   });
 
+app.get("/", (req, res) => {
+  res.send(
+    "Homepage of Syeda's MERN Blog API. All data are saved in MongoDB and is for learning purpose. Add '/users' at the end of the url for users data, Add '/blogs' at the end of the url for blogs data. To explore more about this API please contact Syeda Ismat Farjana on LinkedIn. Thank you!"
+  );
+});
+
 const blogsRouter = require("./routes/blogs");
 const usersRouter = require("./routes/users");
 app.use("/blogs", blogsRouter);
