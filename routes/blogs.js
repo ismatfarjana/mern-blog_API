@@ -19,11 +19,13 @@ router.get("/:id", (req, res) => {
 router.post("/addBlog", (req, res) => {
   const title = req.body.title;
   const author = req.body.author;
+  const authorId = req.body.authorId;
   const description = req.body.description;
   const date = Date.parse(req.body.date);
   const newBlog = new Blog({
     title,
     author,
+    authorId,
     description,
     date
   });
@@ -39,6 +41,7 @@ router.route("/update/:id").post((req, res) => {
     .then(blog => {
       blog.title = req.body.title;
       blog.author = req.body.author;
+      blog.authorId = req.body.authorId;
       blog.description = req.body.description;
       blog.date = Date.parse(req.body.date);
 
