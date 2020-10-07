@@ -59,4 +59,30 @@ router.delete("/:id", (req, res) => {
     .catch(err => res.status(400).json("Error:" + err));
 });
 
+//add comments on one post
+router.post("/:id/comments", (req, res) => {
+  // get the blog for :id
+  Blog.findById(req.params.id)
+    .then(blog => {
+      // create a comments array with new comment
+      const comments = blog.comments.concat({
+        comment: req.body.comment,
+        name: req.body.name
+      });
+
+      // update the blog comments array
+      blog.comments = comments;
+
+      //save the blog with updated comments
+      blog
+        .save()
+        .then(() => res.json(blog))
+        .catch(err => {
+          console.log(err);
+          return res.status(400).json("Error" + err);
+        });
+    })
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
