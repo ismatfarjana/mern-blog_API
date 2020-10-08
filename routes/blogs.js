@@ -36,8 +36,8 @@ router.post("/addBlog", (req, res) => {
 });
 
 //update one blog
-router.route("/update/:id").post((req, res) => {
-  Blog.findById(req.params.id)
+router.route("/update/:id").put((req, res) => {
+  Blog.findByIdAndUpdate(req.params.id)
     .then(blog => {
       blog.title = req.body.title;
       blog.author = req.body.author;
